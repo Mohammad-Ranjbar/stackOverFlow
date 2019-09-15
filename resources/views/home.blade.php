@@ -4,19 +4,13 @@
 
 	<div class="container">
 		@if (session('status'))
+			<script>
+				Swal.fire({
+					text: 'new post is created !',
+					type: 'success',
 
-			{{--<div class="alert alert-success">--}}
-				{{--<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>--}}
-				{{--{{ session('status') }}--}}
-			{{--</div>--}}
-				<script >
-					Swal.fire({
-						text: 'new post is created !',
-						type: 'success',
-						
-
-					})
-				</script>
+				});
+			</script>
 		@endif
 		<button class="btn btn-primary" data-toggle="modal" data-target="#myModal">add new post</button>
 
@@ -57,6 +51,7 @@
 		<div class="row justify-content-center">
 
 			@foreach($posts as $post)
+
 				<div class="col-md-8 my-4 border-bottom border-dark ">
 					<div class="card ">
 
@@ -65,36 +60,7 @@
 							<a href="{{route('show-reply' ,['id' => $post->id])}}">{{$post->title}}  </a>write by
 							: {{$post->user->name}}
 							<update :attributes="{{$post}}"></update>
-							{{--<update inline-template :attributes="{{$post}}">--}}
-								{{--@if ($post->likes()->where([['user_id',auth()->user()->id],['like',1]])->first())--}}
-								{{--<button type="button" class="btn btn-info float-right ml-2" v-if="like===1" disabled>liked--}}
-								{{--</button>--}}
-								{{--<button type="button" class="btn btn-outline-primary float-right ml-1" v-else @click="voted(1)">--}}
-									{{--like--}}
-								{{--</button>--}}
-								{{--@else--}}
-								{{--<a href="{{route('voted-post',['post' => $post->id , 'vote' => 1 ])}}">--}}
-								{{--</a>--}}
-							{{--</update>--}}
-							{{--@endif--}}
-							{{--@if ($post->likes()->where([['user_id',auth()->user()->id],['like',-1]])->first())--}}
-							{{--@else--}}
-							{{--<update inline-template :attributes="{{$post}}">--}}
-								{{--<a href="{{route('voted-post',['post' => $post->id , 'vote' => -1] )}}">--}}
-								{{--</a>--}}
-								{{--<button type="button" class="btn btn-danger float-right ml-1" v-if="like==-1" disabled>diss--}}
-									{{--liked--}}
-								{{--</button>--}}
 
-								{{--<button type="button" class="btn btn-outline-danger float-right ml-2" v-else @click="voted(-1)">--}}
-									{{--diss Like--}}
-								{{--</button>--}}
-
-							{{--</update>--}}
-							{{--@endif--}}
-
-
-							{{--@if ($post->user->id == auth()->user()->id)--}}
 							@can('update',$post)
 								<button type="button" class="btn btn-warning float-right ml-1" data-toggle="modal"
 								        data-target="#myModal-{{$post->id}}">edit
@@ -103,7 +69,6 @@
 									<button type="button" class="btn btn-danger float-right">delete</button>
 								</a>
 							@endcan
-							{{--@endif--}}
 
 						</div>
 
@@ -114,28 +79,7 @@
 						<div class="card-footer">
 							count vote : {{$post->likes()->sum('like')}}
 
-							{{--@if (!auth()->user()->favorites->where('post_id',$post->id)->first())--}}
 							<favorite :attributes="{{$post}}"></favorite>
-							{{--<favorite inline-template :attributes="{{$post}}">--}}
-								{{--<a href="{{route('favorite',['id' => $post->id])}}">--}}
-
-								{{--<button class="btn btn-outline-success float-right" v-if="!fav" @click="favorite">--}}
-									{{--favorite--}}
-								{{--</button>--}}
-
-								{{--</a>--}}
-
-								{{--@else--}}
-								{{--<a href="{{route('unfavorite',['id' => $post->id ])}}">--}}
-
-								{{--<div v-if="fav" >--}}
-								{{--<button class="btn btn-success float-right " v-else @click="unfavorite">--}}
-									{{--favorited--}}
-								{{--</button>--}}
-								{{--</div>--}}
-							{{--</favorite>--}}
-							{{--</a>--}}
-							{{--@endif--}}
 
 						</div>
 

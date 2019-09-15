@@ -35,7 +35,7 @@
 
 		methods: {
 			voted(vote) {
-				axios.get('/post/voted/' + this.attributes.id + '/' + vote);
+				axios.get('/reply/voted/' + this.attributes.id + '/' + vote);
 
 				if (vote == 1) {
 					this.like = 1;

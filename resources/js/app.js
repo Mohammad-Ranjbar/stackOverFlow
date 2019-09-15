@@ -21,6 +21,7 @@ window.Vue = require('vue');
 
 Vue.component('Edit', require('./components/EditComponent.vue').default);
 Vue.component('Update', require('./components/UpdateComponent.vue').default);
+Vue.component('Vote_Reply', require('./components/Vote_ReplyComponent.vue').default);
 Vue.component('Favorite', require('./components/FavoriteComponent.vue').default);
 
 /**

@@ -28,7 +28,8 @@ class Post extends Model
 		$like = $this->likes()->where('user_id', auth()->user()->id)->first();
 		if (isset($like->id)) {
 			return $like->like;
-		} else
+		}
+		else
 			return 0;
 	}
 

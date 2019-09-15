@@ -28,12 +28,13 @@
 						<div class="card">
 							<div class="card-header">
 								<p class="float-left"> {{$reply->user->name}}</p>
-								<a href="{{route('voted-reply',['reply' => $reply->id , 'vote' => 1])}}">
-									<button type="button" class="btn btn-outline-info float-right ml-2">like</button>
-								</a>
-								<a href="{{route('voted-reply',['reply' => $reply->id , 'vote' => -1])}}">
-									<button type="button" class="btn btn-outline-danger float-right ml-2">disslike</button>
-								</a>
+								{{--<a href="{{route('voted-reply',['reply' => $reply->id , 'vote' => 1])}}">--}}
+									{{--<button type="button" class="btn btn-outline-info float-right ml-2">like</button>--}}
+								{{--</a>--}}
+								{{--<a href="{{route('voted-reply',['reply' => $reply->id , 'vote' => -1])}}">--}}
+									{{--<button type="button" class="btn btn-outline-danger float-right ml-2">disslike</button>--}}
+								{{--</a>--}}
+								<update :attributes="{{$reply}}"></update>
 								@if ($post->user_id == auth()->user()->id && !( $reply->bestAnswer) )
 									<a href="{{route('bestAnswer',['id' => $reply->id])}}" class="float-right">
 										<button type="submit" class="btn btn-success">Best Answer</button>
