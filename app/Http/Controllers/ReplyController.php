@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Policies\ReplyPolicy;
 use App\Post;
 use App\Reply;
 use Illuminate\Http\Request;
@@ -28,15 +29,15 @@ class ReplyController extends Controller
 		return back();
 	}
 
-	public function update(Request $request, $id)
+	public function update(Request $request,Reply $reply)
 	{
-		$reply = Reply::find($id);
 
+
+		// $reply = Reply::find($id);
+		$this->authorize('update',$reply);
 		$reply->update([
 			'body' => $request->body,
 		]);
-
-		return back();
 	}
 
 	public function delete($id)
@@ -62,9 +63,11 @@ class ReplyController extends Controller
 
 	public function voted($reply,$vote)
 	{
+
 		$reply = Reply::find($reply);
-		if ($reply->likes()->where('likeable_id',$reply)->first()) {
-			$reply->likes()->where('user_id',auth()->user()->id)->update(['like' => $vote]);
+		$voted = $reply->likes()->where('user_id',auth()->user()->id)->first();
+		if (isset($voted->id)) {
+			$voted->update(['like' => $vote]);
 		}
 		else
 			$reply->likes()->create(['user_id' => auth()->user()->id , 'like' =>$vote]);

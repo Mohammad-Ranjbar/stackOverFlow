@@ -20,7 +20,7 @@
 
 <script>
 	export default {
-		name: 'Update',
+		name: 'Vote',
 		props: ['attributes'],
 		data() {
 			return{
@@ -32,7 +32,6 @@
 			this.islike();
 
 		},
-
 		methods: {
 			voted(vote) {
 				axios.get('/reply/voted/' + this.attributes.id + '/' + vote);

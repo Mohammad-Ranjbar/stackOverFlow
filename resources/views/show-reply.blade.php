@@ -28,13 +28,7 @@
 						<div class="card">
 							<div class="card-header">
 								<p class="float-left"> {{$reply->user->name}}</p>
-								{{--<a href="{{route('voted-reply',['reply' => $reply->id , 'vote' => 1])}}">--}}
-									{{--<button type="button" class="btn btn-outline-info float-right ml-2">like</button>--}}
-								{{--</a>--}}
-								{{--<a href="{{route('voted-reply',['reply' => $reply->id , 'vote' => -1])}}">--}}
-									{{--<button type="button" class="btn btn-outline-danger float-right ml-2">disslike</button>--}}
-								{{--</a>--}}
-								<update :attributes="{{$reply}}"></update>
+								<vote :attributes="{{$reply}}"></vote>
 								@if ($post->user_id == auth()->user()->id && !( $reply->bestAnswer) )
 									<a href="{{route('bestAnswer',['id' => $reply->id])}}" class="float-right">
 										<button type="submit" class="btn btn-success">Best Answer</button>
@@ -45,13 +39,14 @@
 							<div class="card-body">
 
 								<div v-if="editing">
-									<div class="form-group">
-										<textarea class="form-control" v-model="body">{{$reply->body}}</textarea>
 
-									</div>
+										<div class="form-group">
+											<textarea class="form-control" v-model="body"></textarea>
 
-									<button class="btn btn-primary" @click="update">update</button>
-									<button class="btn btn-warning" @click="editing=false">cancele</button>
+										</div>
+
+										<button class="btn btn-primary" @click="update">update</button>
+										<button class="btn btn-warning" @click="editing=false">cancele</button>
 
 								</div>
 								<div v-else v-text="body"></div>

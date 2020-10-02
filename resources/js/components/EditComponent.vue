@@ -15,10 +15,16 @@
 		},
 		methods: {
 			update() {
-				axios.post('/Reply/update/' + this.attributes.id, {
+				axios.patch('/Reply/update/' + this.attributes.id, {
 					body: this.body,
 				});
 				this.editing = false;
+				Swal.fire({
+					type: 'success',
+					title: 'Your Reply has been Update',
+					showConfirmButton: false,
+					timer: 2000
+				})
 			},
 		},
 	};

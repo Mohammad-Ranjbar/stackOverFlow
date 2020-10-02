@@ -45,7 +45,7 @@ Route::get('/Reply/{id}', 'ReplyController@index')->name('show-reply');
 Route::post('/Reply/{id}/{user}', 'ReplyController@create')->name('write-reply');
 Route::get('/Reply/bestAnswer/{id}','ReplyController@bestAnswer')->name('bestAnswer');
 
-Route::post('/Reply/update/{id}','ReplyController@update');
+Route::patch('/Reply/update/{reply}','ReplyController@update');
 Route::get('/Reply/delete/{id}','ReplyController@delete');
 
 Route::get('/reply/voted/{reply}/{vote}', 'ReplyController@voted')->name('voted-reply');
